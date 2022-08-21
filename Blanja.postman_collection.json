@@ -12,8 +12,29 @@
 				{
 					"name": "all category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbGxlckBhZ3VuZy5jb20iLCJyb2xlcyI6InNlbGxlciIsImlhdCI6MTY2MDkzOTExOSwiZXhwIjoxNjYwOTQyNzE5LCJpc3MiOiJibGFuamEifQ.Hzye6pZi6zgyc7aptEKogeBRUJD_mDpVC9XcHmtvoZs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8585/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"category"
+							]
+						}
 					},
 					"response": []
 				},
@@ -21,18 +42,40 @@
 					"name": "show category",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8585/category/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"category",
+								"6"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "create category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAYWd1bmcuY29tIiwicm9sZXMiOiJjdXN0b21lciIsImlhdCI6MTY2MDczODgxNCwiZXhwIjoxNjYwNzQyNDE0LCJpc3MiOiJibGFuamEifQ.o3hxdRH4HA9W2tSNRMwnTWyB0dG_4jgKD3ja_6UFIYc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : 5,\r\n    \"name\" : \"Anu\"\r\n}",
+							"raw": "{\r\n    \"id\" : 6,\r\n    \"name\" : \"Mebel\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,10 +128,20 @@
 				{
 					"name": "delete category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAYWd1bmcuY29tIiwicm9sZXMiOiJjdXN0b21lciIsImlhdCI6MTY2MDczODgxNCwiZXhwIjoxNjYwNzQyNDE0LCJpc3MiOiJibGFuamEifQ.o3hxdRH4HA9W2tSNRMwnTWyB0dG_4jgKD3ja_6UFIYc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8585/category/3",
+							"raw": "http://localhost:8585/category/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -96,7 +149,7 @@
 							"port": "8585",
 							"path": [
 								"category",
-								"3"
+								"6"
 							]
 						}
 					},
@@ -110,42 +163,168 @@
 				{
 					"name": "all product",
 					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "show product",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "create product",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3,\r\n    \"productname\": \"Baju Bagus\",\r\n    \"storename\": \"Tokopaedi\",\r\n    \"sizeproduct\" : \"XXXXXL\",\r\n    \"colorproduct\" : \"Blue\",\r\n    \"priceproduct\" : 45000,\r\n    \"stockproduct\" : 25,\r\n    \"ratingproduct\" : 5,\r\n    \"id_category\" : 1,\r\n    \"id_seller\" : 2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFndW5nLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJpYXQiOjE2NjEwODQxOTMsImV4cCI6MTY2MTA4Nzc5MywiaXNzIjoiYmxhbmphIn0.4H7C_Kk5zNhzFwiVa_IrURlou5n9buAJiYZChEyCF8M",
+									"type": "string"
 								}
-							}
+							]
 						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "http://localhost:8585/item",
+							"raw": "http://localhost:8585/product?sortby=id&search=Baju&sort=asc&page=1&limit=5\n",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8585",
 							"path": [
-								"item"
+								"product"
+							],
+							"query": [
+								{
+									"key": "sortby",
+									"value": "id"
+								},
+								{
+									"key": "search",
+									"value": "Baju"
+								},
+								{
+									"key": "sort",
+									"value": "asc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbGxlckBhZ3VuZy5jb20iLCJyb2xlcyI6InNlbGxlciIsImlhdCI6MTY2MDkzNjA1MywiZXhwIjoxNjYwOTM5NjUzLCJpc3MiOiJibGFuamEifQ.D5AQkv5t-t-ovVuSEtoX93BhumPApDTFl3Qglij2UIg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8585/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbGxlckBhZ3VuZy5jb20iLCJyb2xlcyI6InNlbGxlciIsImlhdCI6MTY2MDkzMzUyMiwiZXhwIjoxNjYxMDE5OTIyfQ.QVOvtSjKs6bUiyyWPbcw5trC1blKumuhHflR_IodYN0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "productname",
+									"value": "Celana Baru",
+									"type": "text"
+								},
+								{
+									"key": "storename",
+									"value": "M&H",
+									"type": "text"
+								},
+								{
+									"key": "sizeproduct",
+									"value": "XL",
+									"type": "text"
+								},
+								{
+									"key": "colorproduct",
+									"value": "Black",
+									"type": "text"
+								},
+								{
+									"key": "priceproduct",
+									"value": "20000",
+									"type": "text"
+								},
+								{
+									"key": "stockproduct",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "ratingproduct",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "id_category",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "id_seller",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/ASUS/OneDrive/Pictures/weirdchamp.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8585/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"product"
 							]
 						}
 					},
@@ -154,19 +333,75 @@
 				{
 					"name": "update product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbGxlckBhZ3VuZy5jb20iLCJyb2xlcyI6InNlbGxlciIsImlhdCI6MTY2MDkzOTExOSwiZXhwIjoxNjYwOTQyNzE5LCJpc3MiOiJibGFuamEifQ.Hzye6pZi6zgyc7aptEKogeBRUJD_mDpVC9XcHmtvoZs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"productname\": \"Baju baru\",\r\n    \"storename\": \"M&H\",\r\n    \"sizeproduct\": \"XL\",\r\n    \"colorproduct\": \"Red\",\r\n    \"priceproduct\": 50000,\r\n    \"stockproduct\": 15,\r\n    \"ratingproduct\": 5,\r\n    \"id_category\": 1,\r\n    \"id_seller\": 2\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productname",
+									"value": "Celana Lama",
+									"type": "text"
+								},
+								{
+									"key": "storename",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sizeproduct",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "colorproduct",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "priceproduct",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "stockproduct",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ratingproduct",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_category",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_seller",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:8585/product/1",
+							"raw": "http://localhost:8585/product/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -174,7 +409,7 @@
 							"port": "8585",
 							"path": [
 								"product",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -183,10 +418,20 @@
 				{
 					"name": "delete product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbGxlckBhZ3VuZy5jb20iLCJyb2xlcyI6InNlbGxlciIsImlhdCI6MTY2MDkzNjA1MywiZXhwIjoxNjYwOTM5NjUzLCJpc3MiOiJibGFuamEifQ.D5AQkv5t-t-ovVuSEtoX93BhumPApDTFl3Qglij2UIg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8585/product/1",
+							"raw": "http://localhost:8585/product/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -194,7 +439,7 @@
 							"port": "8585",
 							"path": [
 								"product",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -209,7 +454,18 @@
 					"name": "get transaction",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8585/transaction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"transaction"
+							]
+						}
 					},
 					"response": []
 				},
@@ -217,7 +473,19 @@
 					"name": "show transaction",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8585/transaction/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"transaction",
+								"4"
+							]
+						}
 					},
 					"response": []
 				},
@@ -226,6 +494,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"quantity\" : 50,\r\n    \"totalprice\" : 1000000,\r\n    \"payment_method\" : \"Cash\",\r\n    \"order_status\" : \"Pending\",\r\n    \"transaction_date\" : \"2022-01-10\",\r\n    \"id_customer\" : 1,\r\n    \"id_product\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8585/transaction",
 							"protocol": "http",
@@ -275,7 +552,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8585/transaction/3",
+							"raw": "http://localhost:8585/transaction/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -283,7 +560,139 @@
 							"port": "8585",
 							"path": [
 								"transaction",
-								"3"
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "registrasi user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@agung.com\",\r\n    \"password\" : \"12345\",\r\n    \"fullname\" : \"Admin\",\r\n    \"roles\" : \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8585/user/registrasi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"user",
+								"registrasi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"seller@agung.com\",\r\n    \"password\" :\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8585/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAYWd1bmcuY29tIiwicm9sZXMiOiJjdXN0b21lciIsImlhdCI6MTY2MDc0MDA3MCwiZXhwIjoxNjYwNzQzNjcwLCJpc3MiOiJibGFuamEifQ.elBTmxzEWJM0s6XZXyiCaJ2eHR5WAFsxoAVwNrYJYzU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbGxlckBhZ3VuZy5jb20iLCJyb2xlcyI6InNlbGxlciIsImlhdCI6MTY2MDkyOTY5NywiZXhwIjoxNjYxMDE2MDk3fQ.EstR4jTiL9d-V4JyCJUYpFMijh0J9lZNbRQm6Twq9vk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8585/user/refreshtoken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"user",
+								"refreshtoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAYWd1bmcuY29tIiwicm9sZXMiOiJjdXN0b21lciIsImlhdCI6MTY2MDczODgxNCwiZXhwIjoxNjYwNzQyNDE0LCJpc3MiOiJibGFuamEifQ.o3hxdRH4HA9W2tSNRMwnTWyB0dG_4jgKD3ja_6UFIYc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8585/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8585",
+							"path": [
+								"user",
+								"profile"
 							]
 						}
 					},

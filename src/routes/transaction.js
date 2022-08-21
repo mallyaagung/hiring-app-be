@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const transactionController = require('../controller/transaction');
+const { protect } = require('../middleware/auth');
+const { verify } = require('../middleware/verifyroles');
 
-router.get('/', transactionController.getAll);
-router.get('/:id', transactionController.getTransaction);
-router.post('/', transactionController.insert);
-router.put('/:id', transactionController.update);
-router.delete('/:id', transactionController.delete);
+router.get('/', protect, verify(["seller", "customer", "admin"]), transactionController.getAll);
+router.get('/:id', protect, verify(["seller", "customer", "admin"]), transactionController.getTransaction);
+router.post('/', protect, verify(["admin"]), transactionController.insert);
+router.put('/:id', protect, verify(["admin"]), transactionController.update);
+router.delete('/:id', protect, verify(["admin"]), transactionController.delete);
 
 module.exports = router

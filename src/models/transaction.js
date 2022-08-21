@@ -2,7 +2,7 @@ const Pool = require('../config/db')
 
 
 const selectAll = () => {
-    return Pool.query(`SELECT transaction.id, product.productname, product.priceproduct,transaction.quantity, transaction.totalprice, customer.customername, customer.customeraddress, transaction.payment_method FROM transaction INNER JOIN product ON transaction.id_product=product.id INNER JOIN customer ON transaction.id_customer = customer.id;`);
+    return Pool.query(`SELECT * FROM transaction`);
 }
 
 const selectTransaction = (id) => {
