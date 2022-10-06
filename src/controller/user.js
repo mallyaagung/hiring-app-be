@@ -1,85 +1,67 @@
-const { v4: uuidv4 } = require('uuid');
-const bcrypt = require('bcryptjs');
-const createError = require('http-errors')
-const jwt = require('jsonwebtoken')
-const { findEmail, create } = require('../models/user')
-const commonHelper = require('../helper/common');
-const authHelper = require('../helper/auth');
+const userModel = require("../models/user");
+const commonHelper = require("../helper/common");
+const client = require("../config/redis");
+const createError = require("http-errors");
 
 const userController = {
-    registrasi: async (req, res, next) => {
-        try {
-            const { email, password, fullname, roles } = req.body;
-            const { rowCount } = await findEmail(email)
-            const salt = bcrypt.genSaltSync(10);
-            const passwordHash = bcrypt.hashSync(password, salt);
-            if (rowCount) {
-                return next(createError(403, "Email is already used"))
-            }
-            const data = {
-                id: uuidv4(),
-                email,
-                passwordHash,
-                fullname,
-                roles
-            }
-            create(data)
-                .then(
-                    result => commonHelper.response(res, result.rows, 201, "Account has been created")
-                )
-                .catch(err => res.send(err)
-                )
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    login: async (req, res) => {
-        try {
-            const { email, password } = req.body
-            const { rows: [user] } = await findEmail(email)
-            if (!user) {
-                return commonHelper.response(res, null, 403, 'Email is invalid')
-            }
-            const isValidPassword = bcrypt.compareSync(password, user.password)
-            console.log(isValidPassword);
-
-            if (!isValidPassword) {
-                return commonHelper.response(res, null, 403, 'Password is invalid')
-            }
-            delete user.password
-            const payload = {
-                email: user.email,
-                roles: user.roles
-            }
-            user.token = authHelper.generateToken(payload)
-            user.refreshToken = authHelper.generateRefreshToken(payload)
-
-            commonHelper.response(res, user, 201, 'login is successful')
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    profile: async (req, res) => {
-        const email = req.payload.email
-        const { rows: [user] } = await findEmail(email)
-        delete user.password
-        commonHelper.response(res, user, 200)
-    },
-    refreshToken: (req, res) => {
-        const refreshToken = req.body.refreshToken
-        const decoded = jwt.verify(refreshToken, process.env.SECRET_KEY_JWT)
-        const payload = {
-            email: decoded.email,
-            roles: decoded.roles
-        }
-        const result = {
-            token: authHelper.generateToken(payload),
-            refreshToken: authHelper.generateRefreshToken(payload)
-        }
-        commonHelper.response(res, result, 200)
-
+  getAllUser: async (req, res) => {
+    try {
+      const sortby = req.query.sortby;
+      const sort = req.query.sort;
+      const search = req.query.search;
+      let querySearch = "";
+      if (search === undefined) {
+        querySearch = ``;
+      } else {
+        querySearch = ` where fullname like '%${search}%' `;
+      }
+      const result = await userModel.selectAll({
+        sort,
+        sortby,
+        querySearch,
+      });
+      commonHelper.response(res, result.rows, 200, "get data success");
+    } catch (error) {
+      console.log(error);
     }
-}
+  },
+  getUser: (req, res) => {
+    const id = Number(req.params.id);
+    userModel
+      .selectUser(id)
+      .then((result) => {
+        client.setEx(`product/${id}`, 60 * 60, JSON.stringify(result.rows));
+        commonHelper.response(
+          res,
+          result.rows,
+          200,
+          "get data success from database"
+        );
+      })
+      .catch((err) => res.send(err));
+  },
+  update: (req, res) => {
+    try {
+      const PORT = process.env.PORT || 5000;
+      const DB_HOST = process.env.DB_HOST || "localhost";
+      const id = req.params.id;
+      let picture = req.file.filename;
+      const { fullname, phone, dob, job, address } = req.body;
+      userModel
+        .updateUser(
+          id,
+          fullname,
+          phone,
+          dob,
+          (picture = `http://${DB_HOST}:${PORT}/img/${picture}`),
+          job,
+          address
+        )
+        .then(res.json("Product Updated"));
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
 
-
-module.exports = userController 
+module.exports = userController;
