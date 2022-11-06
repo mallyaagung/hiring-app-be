@@ -3,21 +3,27 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
+const xss = require("xss-clean");
 const createError = require("http-errors");
 const app = express();
-const userRouter = require("./src/routes/user");
-const skillRouter = require("./src/routes/skill");
-const authRouter = require("./src/routes/auth");
 
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
-app.use(helmet());
-app.use("/img", express.static("./upload"));
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+  })
+);
+app.use(xss());
+app.use("/img", express.static("./public/photo"));
 
-app.use("/user", userRouter);
-app.use("/skill", skillRouter);
-app.use("/auth", authRouter);
+app.use(require("./src/routes/auth.route"));
+app.use(require("./src/routes/user.route"));
+app.use(require("./src/routes/skill.route"));
+app.use(require("./src/routes/experience.route"));
+app.use(require("./src/routes/project.route"));
 
 app.all("*", (req, res, next) => {
   next(new createError.NotFound());
