@@ -21,7 +21,7 @@ const {
 const router = express.Router();
 
 router
-  .get("/user/worker", list)
+  .get("/user/worker", jwtAuth, list)
   .get("/user/recruiter", jwtAuth, list)
   .get("/user/:id", jwtAuth, detail)
   .put(
