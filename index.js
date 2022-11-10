@@ -17,7 +17,7 @@ app.use(
   })
 );
 app.use(xss());
-app.use("/img", express.static("./public/photo"));
+app.use("/img", express.static("./upload/photo"));
 
 app.use(require("./src/routes/auth.route"));
 app.use(require("./src/routes/user.route"));
