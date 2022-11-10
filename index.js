@@ -25,6 +25,10 @@ app.use(require("./src/routes/skill.route"));
 app.use(require("./src/routes/experience.route"));
 app.use(require("./src/routes/project.route"));
 
+app.get("/", (req, res) => {
+  res.json(`Hiring App Api v1.0`);
+});
+
 app.all("*", (req, res, next) => {
   next(new createError.NotFound());
 });
@@ -39,7 +43,7 @@ app.use((err, req, res, next) => {
 });
 
 const host = process.env.PGHOST;
-const port = process.env.PGPORT;
+const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`server running on http://${host}:${port}`);
+  console.log(`server running on port : ${port}`);
 });
