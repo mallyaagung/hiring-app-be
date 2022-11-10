@@ -42,7 +42,6 @@ app.use((err, req, res, next) => {
   next();
 });
 
-const host = process.env.PGHOST;
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`server running on port : ${port}`);
